@@ -42,6 +42,7 @@ void loop() {
   digitalWrite(Right_R, HIGH); 
   digitalWrite(Up_R, LOW);
   digitalWrite(Up_G, HIGH);
+  
   unsigned long CheckTime = millis(); //타이머 함수 deley를 이용하여도 millis()는 흐른다
   while(interval > (millis() - CheckTime)) {
     if(state1 == false) { //위측 신호등이 녹색일 동안에 스위치를 누를 경우 진행
