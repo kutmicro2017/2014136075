@@ -155,6 +155,7 @@ void loop() {
   //delay(interval);
   digitalWrite(Right_G, LOW);
   digitalWrite(Left_G, LOW);
+
   BlinkLED(Right_Y, Left_Y);
   digitalWrite(Right_R, HIGH);
   digitalWrite(Left_R, HIGH);
@@ -211,15 +212,15 @@ void BlinkLED(const int YellowLED1, const int YellowLED2) {
 // 스위치 함수
 void SwitchLoop(int GLight1, int YLight1, int RLight1, int GLight2, int YLight2, int RLight2, long CheckTime) {
   int Time;
-  long DTime;
-  int FTime;//시간 앞자리
-  int LTime;//시간 뒷자리
+  long DTime;	//스위치 누르면 3초 대기
+  int FTime;	//시간 앞자리
+  int LTime;	//시간 뒷자리
   while(interval > (millis() - CheckTime)) {  //interval 시간 동안 진행
     if(state1 == false) { //위 측 신호등이 녹색등일 동안에 스위치를 누를 경우 진행
       
-      DTime = millis();
+      DTime = millis();//스위치 누르면 대기
       while(3000 > (millis() - DTime)){ //3초 동안 돌린다는 의미
-       PSignal(0);
+       PSignal(0);//사람 모습 출력
       }
       digitalWrite(GLight1, LOW);
       digitalWrite(GLight2, LOW);
@@ -227,13 +228,13 @@ void SwitchLoop(int GLight1, int YLight1, int RLight1, int GLight2, int YLight2,
       digitalWrite(RLight1, HIGH);
       digitalWrite(RLight2, HIGH);
       state1 = true;
-      //CheckTime = millis(); //언제버튼을 누르든 보행자 신호가 interval시간 (정해진 시간)이 되도록 하라 > 이거만 입력하면 됨
-      while(interval > (millis() - CheckTime)){
+      //CheckTime = millis();
+      while(interval > (millis() - CheckTime)){//도트메트릭스 출력하기
       //PSignal(1);
         Time = (interval - (millis() - CheckTime)) / 1000;
-        FTime = Time / 10;//시간 앞자리 구하기
-        LTime = Time % 10;//시간 뒷자리 구하기
-        NSignal(FTime, LTime);//도트 메트릭스에 숫자 출력
+        FTime = Time / 10;	//시간 앞자리 구하기
+        LTime = Time % 10;	//시간 뒷자리 구하기
+        NSignal(FTime, LTime);	//도트 메트릭스에 숫자 출력
       }
       CleanDOT();//다 지우고
     }
