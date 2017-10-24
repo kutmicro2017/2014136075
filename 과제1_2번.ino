@@ -280,7 +280,7 @@ void PSignal(int GoStop){
     for(int j = 0; j < 8; j++){
       CleanDOT();//전체삭제
       digitalWrite(row[i], HIGH);//가로줄 전체 다 켜놓고
-      if(PTLight[GoStop][i][j] == 1){???
+      if(PTLight[GoStop][i][j] == 1){
        digitalWrite(col[j], LOW);
         delay(1);
       }
